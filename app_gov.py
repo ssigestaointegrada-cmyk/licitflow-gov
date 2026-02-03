@@ -27,7 +27,16 @@ def criar_estrutura_obra(nome_obra):
 
 def main():
     st.set_page_config(page_title="LicitFlow Gov AI", layout="wide", page_icon="🏛️")
-    st.sidebar.title("🏛️ LicitFlow Gov AI")
+    
+    # --- NOVO BLOCO DO BRASÃO E TÍTULO ---
+    # Substitua a URL abaixo pelo link do brasão da sua prefeitura se preferir
+    url_brasao = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Coat_of_arms_of_Brazil.svg/500px-Coat_of_arms_of_Brazil.svg.png"
+    
+    with st.sidebar:
+        st.image(url_brasao, width=100)
+        st.title("LicitFlow Gov AI")
+        st.subheader("Secretaria de Infraestrutura")
+        st.markdown("---")
     
     obras = [f for f in os.listdir(CAMINHO_BASE) if os.path.isdir(os.path.join(CAMINHO_BASE, f))]
     sel = st.sidebar.selectbox("Trabalhar na Obra:", ["-- Selecione ou Crie Nova --"] + obras)
@@ -133,3 +142,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
