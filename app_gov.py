@@ -28,14 +28,27 @@ def criar_estrutura_obra(nome_obra):
 def main():
     st.set_page_config(page_title="LicitFlow Gov AI", layout="wide", page_icon="🏛️")
     
-    # --- NOVO BLOCO DO BRASÃO E TÍTULO ---
-    # Substitua a URL abaixo pelo link do brasão da sua prefeitura se preferir
-    url_brasao = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Coat_of_arms_of_Brazil.svg/500px-Coat_of_arms_of_Brazil.svg.png"
-    
+    # --- ÁREA DE PERSONALIZAÇÃO (WHITE LABEL) ---
     with st.sidebar:
-        st.image(url_brasao, width=100)
-        st.title("LicitFlow Gov AI")
-        st.subheader("Secretaria de Infraestrutura")
+        st.subheader("⚙️ Personalização")
+        # Nome da Prefeitura/Secretaria
+        nome_orgao = st.text_input("Nome do Órgão:", "Prefeitura Municipal")
+        sub_orgao = st.text_input("Secretaria/Departamento:", "Secretaria de Infraestrutura")
+        
+        # Upload do Brasão
+        logo_upload = st.file_uploader("Upload do Brasão (PNG/JPG):", type=["png", "jpg", "jpeg"])
+        
+        st.markdown("---")
+        
+        # Exibição da Identidade Visual
+        if logo_upload is not None:
+            st.image(logo_upload, width=100)
+        else:
+            # Caso não suba nada, mostra um ícone padrão
+            st.title("🏛️")
+            
+        st.title(nome_orgao)
+        st.caption(sub_orgao)
         st.markdown("---")
     
     obras = [f for f in os.listdir(CAMINHO_BASE) if os.path.isdir(os.path.join(CAMINHO_BASE, f))]
@@ -142,4 +155,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
